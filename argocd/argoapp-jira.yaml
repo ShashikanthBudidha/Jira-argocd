@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jira-dev
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    # 1Ô∏è‚É£ Public Helm chart repo
+    - repoURL: https://atlassian.github.io/data-center-helm-charts
+      chart: jira
+      targetRevision: 1.16.1
+      helm:
+        valueFiles:
+          - $values/Values-jira.yaml   # Ì±à reference to 2nd repo
+
+    # 2Ô∏è‚É£ Private repo with values
+    - repoURL: git@github.com:bsk111675/Jira-data-center-helm-charts.git
+      targetRevision: main
+      ref: values   # Ì±à define alias "values"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

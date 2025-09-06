@@ -1,0 +1,51 @@
+clustering:
+  enabled: true
+
+license:
+  secretName: license
+  secretKey: license-key
+
+image:
+  repository: atlassian/jira-software
+  tag: "9.12.22"
+  pullPolicy: IfNotPresent
+
+ingress:
+  create: true
+  nginx: true
+  maxBodySize: 250m
+  host: jira.example
+  path: "/"
+  https: true
+  tlsSecretName: jira-selfsigned-tls
+volumes:
+  localHome:
+    customVolume:
+      persistentVolumeClaim:
+        claimName: pvc-jira-localhome
+    mountPath: "/var/atlassian/application-data/jira"
+    subPath: ""
+  sharedHome:
+    customVolume:
+      persistentVolumeClaim:
+        claimName: pvc-jira-sharedhome
+    mountPath: "/var/atlassian/application-data/shared-home"
+    subPath: ""
+
+securityContext:
+  fsGroup: 2001
+  volumePermissions:
+    enabled: true
+
+jira:
+  additionalJvmArgs:
+  - -Datlassian.plugins.enable.wait=600
+  resources:
+    container:
+      requests:
+        cpu: "2"
+        memory: 2G
+    jvm:
+      maxHeap: 2g
+      minHeap: 2g
+      reservedCodeCache: 512m
