@@ -51,13 +51,6 @@ Adding repositories to Argo CD Add a Git repository (SSH):
 argocd repo add git@github.com:<your-org>/<your repo>.git --ssh-private-key-path ~/.ssh/private_key
 
 Create the Application( use the file available in argocd folder) 
-Apply using kubectl: kubectl apply -f argoapp-jira.yam
+Apply using kubectl: 
+kubectl apply -f argoapp-jira.yam
 
- Add a custom footer
-Pages 1
-Find a page…
-Home
-step-1:
-Step 2 — Create Argo CD Application for deploying Jira using Helm
- Add a custom sidebar
-Clone this wiki locally
