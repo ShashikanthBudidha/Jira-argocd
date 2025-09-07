@@ -47,9 +47,11 @@ kubectl get pods -n argocd
 Step 2 — Create Argo CD Application for deploying Jira using Helm
 Purpose: Create an Argo CD Application that instructs Argo CD to deploy the Jira Helm chart into your target Kubernetes namespace/cluster, and to manage future updates automatically if desired.
 
-Adding repositories to Argo CD Add a Git repository (SSH): argocd repo add git@github.com:<your-org>/<your repo>.git --ssh-private-key-path ~/.ssh/private_key
+Adding repositories to Argo CD Add a Git repository (SSH): 
+argocd repo add git@github.com:<your-org>/<your repo>.git --ssh-private-key-path ~/.ssh/private_key
 
-Create the Application( use the file available in argocd folder) Apply using kubectl: kubectl apply -f argoapp-jira.yam
+Create the Application( use the file available in argocd folder) 
+Apply using kubectl: kubectl apply -f argoapp-jira.yam
 
  Add a custom footer
 Pages 1
